@@ -58,16 +58,42 @@ $this->load->view('admin_views/_template/head');
                                    $qsmt = $this->db->query("SELECT * From master_data_semester where id_smt = '$id_smt'");
                                    $nama_smt = $qsmt->row()->nama_smt;
 
-                                   $today = date('Y-m-d');
 
-                                   $tgl_absen = date('Y-m-d');
+
 
                                    if (empty($id_kelas) || $id_kelas == NULL) {
                                        echo "<h1>Anda Bukan Wali Kelas, Tidak Bisa Melakukan Kegiatan Ini</h1>";
                                    }elseif (!empty($id_kelas)) {
 
-
                                         ?>
+                                        <div class="panel panel-headline">
+                                             <div class="panel">
+                                                  <div class="panel-heading">
+                                                      <h3 class="panel-title"><?=$judul?> <?=$rsiswa->nm_siswa?></h3>
+
+                                                  </div>
+                                                  <div class="panel-body no-padding">
+                                                       <form class="form-horizontal" action="" role="form" method="post" enctype="multipart/form-data" id="form_cari">
+                                                            <div class="form-group">
+                                                                 <label class="col-lg-2 control-label" for="required">Pilih Tanggal Absensi</label>
+                                                                      <div class="col-lg-8">
+                                                                 <input name="tgl_absen" class="form-control datepicker" id="tgl_absen" type="text"  value="<?=$this->input->post('tgl_absen')?>"style="width:50%">
+                                                                 </div><div class="fix"></div>
+                                                          </div>
+
+                                                          <div class="form-group">
+                                                            <div class="col-md-offset-1">
+                                                               <button type="submit" class="btn btn-default marginR10" id="submit">Cari</button>
+                                                             </div>
+                                                          </div><!-- End .form-group  -->
+
+                                                     </form>
+                                                  </div>
+
+                                             </div>
+                                        </div>
+
+
                                                   <div class="panel panel-headline">
                                                        <div class="panel">
                                                             <div class="panel-heading">
@@ -75,6 +101,13 @@ $this->load->view('admin_views/_template/head');
 
                                                                  $rjudul = $this->db->query("SELECT * FROM kelas where id_kelas= '$id_kelas'");
                                                                       foreach ($rjudul->result() as $kelas) {}
+
+                                                                           if ($this->input->post('tgl_absen') == NULL)
+                                                                           {
+                                                                                $tgl_absen = date('Y-m-d');
+                                                                           }else {
+                                                                                $tgl_absen = $this->input->post('tgl_absen');
+                                                                           }
                                                                   ?>
                                                                 <h3 class="panel-title">Data Absensi</h3>
                                                                 <div class="alert alert-info col-md-8">
@@ -116,8 +149,6 @@ $this->load->view('admin_views/_template/head');
                                                                            </thead>
                                                                            <tbody>
                                                                                 <?php
-
-                                                                                $tgl_absen = date('Y-m-d',strtotime($tgl_absen));
 
 
 

@@ -30,18 +30,42 @@ class s_pr_siswa extends CI_Controller
      function index()
     {
 
-         $judul = array('judul' => 'Tambah PR');
+         $judul = array('judul' => 'Data PR');
          $passing_data = $this->session->userdata('logged_guru');
          $data = array_merge($passing_data,$judul);
          $id_guru = $passing_data[id_guru];
 
          $kumpul_matpel = $this->model_staff->ambil_kelas($id_guru);
          $data = array_merge($kumpul_matpel,$data);
-         /*echo "<pre>";
-         print_r($data);
-         echo "</pre>";*/
-         $this->load->view('staff_views/pr_siswa/s_form_pr_siswa',$data);
 
+         //print_r($data);die();
+
+         $this->load->view('staff_views/pr_siswa/s_view_pr',$data);
+
+    }
+
+    public function tambah_data()
+    {
+         $judul = array('judul' => 'Tambah PR');
+         $passing_data = $this->session->userdata('logged_guru');
+         $data = array_merge($passing_data,$judul);
+         $id_guru = $passing_data[id_guru];
+         $kumpul_matpel = $this->model_staff->ambil_kelas($id_guru);
+         $data = array_merge($kumpul_matpel,$data);
+
+         $this->load->view('staff_views/pr_siswa/s_form_pr_siswa',$data);
+    }
+
+    public function edit_data()
+    {
+         $judul = array('judul' => 'Edit PR');
+         $passing_data = $this->session->userdata('logged_guru');
+         $data = array_merge($passing_data,$judul);
+         $id_guru = $passing_data[id_guru];
+         $kumpul_matpel = $this->model_staff->ambil_kelas($id_guru);
+         $data = array_merge($kumpul_matpel,$data);
+
+         $this->load->view('staff_views/pr_siswa/s_form_pr_siswa',$data);
     }
 
     function proses_tambah(){

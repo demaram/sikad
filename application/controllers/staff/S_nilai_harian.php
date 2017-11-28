@@ -74,25 +74,21 @@ class S_nilai_harian extends CI_Controller
         foreach ($siswa->result() as $row) {
              $id_pd_siswa = $this->input->post('id_pd_siswa_'.$row->id_pd_siswa);
              $nilai_angka_reseptif = $this->input->post('nilai_angka_reseptif_'.$row->id_pd_siswa);
-             $nilai_huruf_reseptif = $this->input->post('nilai_huruf_reseptif_'.$row->id_pd_siswa);
              $nilai_angka_ekspresif = $this->input->post('nilai_angka_ekspresif_'.$row->id_pd_siswa);
-             $nilai_huruf_ekspresif = $this->input->post('nilai_huruf_ekspresif_'.$row->id_pd_siswa);
              echo $nilai_huruf_ekspresif;
              $cari       = $this->db->query("SELECT * FROM nilai_harian where tgl_nilai = '$tgl_nilai' AND id_pd_siswa='$row->id_pd_siswa' AND id_matpel='$id_matpel'");
 
                if ($cari->num_rows()== 1) {
                    $upd = $this->db->query("UPDATE nilai_harian set id_matpel = '$id_matpel', id_pd_siswa = '$id_pd_siswa', tgl_nilai ='$tgl_nilai',
-                                             nilai_angka_ekspresif = '$nilai_angka_ekspresif' ,
-                                             nilai_huruf_ekspresif ='$nilai_huruf_ekspresif',
-                                             nilai_angka_reseptif ='$nilai_angka_reseptif',
-                                              nilai_huruf_reseptif ='$nilai_huruf_reseptif'
+                                             nilai_angka_ekspresif = '$nilai_angka_ekspresif',
+                                             nilai_angka_reseptif ='$nilai_angka_reseptif'
                                              WHERE tgl_nilai = '$tgl_nilai' AND id_pd_siswa = '$id_pd_siswa' AND id_matpel='$id_matpel'");
                        if ($upd == TRUE ) {
                             $sukses_update = 1;
                        }
                }else{
-                       $ins = $this->db->query("INSERT into nilai_harian (id_matpel, id_pd_siswa, tgl_nilai, nilai_angka_reseptif, nilai_huruf_reseptif, nilai_angka_ekspresif, nilai_huruf_ekspresif)
-                                                                      VALUES('$id_matpel','$id_pd_siswa','$tgl_nilai','$nilai_angka_reseptif','$nilai_huruf_reseptif','$nilai_angka_ekspresif','$nilai_huruf_ekspresif')");
+                       $ins = $this->db->query("INSERT into nilai_harian (id_matpel, id_pd_siswa, tgl_nilai, nilai_angka_reseptif,  nilai_angka_ekspresif)
+                                                                      VALUES('$id_matpel','$id_pd_siswa','$tgl_nilai','$nilai_angka_reseptif','$nilai_angka_ekspresif')");
                        if ($ins == TRUE) {
                             $sukses_insert=1;
                        }

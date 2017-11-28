@@ -114,10 +114,8 @@ $this->load->view('admin_views/_template/head');
                                                                                      <th >No</th>
                                                                                      <th >Nama</th>
                                                                                      <th >NISN</th>
-                                                                                     <th >Nilai Reseptif(angka)</th>
-                                                                                     <th >Nilai Reseptif(huruf)</th>
-                                                                                     <th >Nilai Ekspresif(Angka)</th>
-                                                                                     <th >Nilai Ekspresif(huruf)</th>
+                                                                                     <th >Nilai Reseptif</th>
+                                                                                     <th >Nilai Ekspresif</th>
                                                                                 </tr>
                                                                            </thead>
                                                                            <tbody>
@@ -154,33 +152,13 @@ $this->load->view('admin_views/_template/head');
                                                                                     <td><input type="text" class="form-control setengah number" name="nilai_angka_reseptif_<?=$row->id_pd_siswa?>" value="<?=$harian->nilai_angka_reseptif?>" maxlength="3"></td>
                                                                                     <input type="hidden" name="id_pd_siswa_<?=$row->id_pd_siswa?>" value="<?=$row->id_pd_siswa?>">
 
-                                                                                    <td><select class="form-control setengah" name="nilai_huruf_reseptif_<?=$row->id_pd_siswa?>">
-                                                                                         <?php foreach($qskala->result() as $skala){ ?>
-                                                                                           <option value="<?=$skala->nilai_huruf?>"
-                                                                                                <?php if ($harian->nilai_huruf_reseptif == $skala->nilai_huruf) {
-                                                                                                     echo "selected ='selected'";
-                                                                                                 } ?>
-                                                                                                ><?=$skala->nilai_huruf?>
-                                                                                            </option>
-                                                                                           <?php } ?>
-                                                                                         </select>
-                                                                                    </td>
+
 
 
                                                                                     <td><input type="text" class="form-control setengah number" name="nilai_angka_ekspresif_<?=$row->id_pd_siswa?>" value="<?=$harian->nilai_angka_ekspresif?>" maxlength="3"></td>
 
 
-                                                                                    <td><select class="form-control setengah" name="nilai_huruf_ekspresif_<?=$row->id_pd_siswa?>">
-                                                                                         <?php foreach($qskala->result() as $skala){ ?>
-                                                                                           <option value="<?=$skala->nilai_huruf?>"
-                                                                                                <?php if ($harian->nilai_huruf_ekspresif == $skala->nilai_huruf) {
-                                                                                                     echo "selected ='selected'";
-                                                                                                 } ?>
-                                                                                                ><?=$skala->nilai_huruf?>
-                                                                                            </option>
-                                                                                           <?php } ?>
-                                                                                         </select>
-                                                                                    </td>
+
 
 
                                                                                 </tr>

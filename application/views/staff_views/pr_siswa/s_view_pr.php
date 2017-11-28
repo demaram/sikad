@@ -17,7 +17,9 @@ $this->load->view('admin_views/_template/head');
                 ?>
 			<!-- END NAVBAR -->
                <?php
-                    $data = $this->db->query("SELECT * FROM tbl_pr WHERE id_smt= '$id_smt'");
+                    $imp_id_kelas = implode(',',$all_id_kelas);
+                    //echo $imp_id_kelas;
+                    $data = $this->db->query("SELECT * FROM tbl_pr WHERE id_smt= '$id_smt' AND id_kelas IN($imp_id_kelas)");
                 ?>
 
 			<!-- MAIN CONTENT -->
@@ -106,6 +108,7 @@ $this->load->view('admin_views/_template/head');
                                                        <th width="5%">Tgl Mulai</th>
                                                        <th width="5%">Tgl Dikumpulkan</th>
                                                        <th width="25%">Detail PR</th>
+                                                       <th width="5%">Keterangan</th>
                                                        <th style="text-align:center ;width:26%">Aksi</th>
                                                   </tr>
                                              </thead>
@@ -123,6 +126,7 @@ $this->load->view('admin_views/_template/head');
                                                        $data_matpel = $this->db->query("SELECT * FROM mata_pelajaran where id_matpel = '$row->id_matpel'");
                                                        foreach($data_matpel->result() as $r_mtp){}
 
+
                                                        ?>
                                                   <tr>
                                                        <td><?=$no?></td>
@@ -131,9 +135,10 @@ $this->load->view('admin_views/_template/head');
                                                        <td><?=$r_mtp->nama_matpel?></td>
                                                        <td><?=date('d-M-Y',strtotime($row->tgl_awal))?></td>
                                                        <td><?=date('d-M-Y',strtotime($row->tgl_akhir))?></td>
+                                                       <td><?=strtotime(date('Y-m-d')) >= strtotime($row->tgl_akhir) ? '<span class="label label-warning">Expired </span>' : '<span class="label label-primary"> Berlangsung </span>'?></td>
                                                        <td><?=$row->detail?></td>
-                                                       <td style="text-align:center;display:inline-block"><a href="<?=base_url()?>admin/pr_siswa/edit_data?id=<?=$row->id_pr?>" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> Edit</a>
-                                                            <a href="<?=base_url()?>admin/pr_siswa/proses_hapus?id=<?=$row->id_pr?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                                                       <td style="text-align:center;display:inline-block"><a href="<?=base_url()?>/staff/S_pr_siswa/edit_data?id=<?=$row->id_pr?>" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> Edit</a>
+                                                            <a href="<?=base_url()?>staff/S_pr_siswa/proses_hapus?id=<?=$row->id_pr?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
                                                        </td>
                                                   </tr>
                                                   <?php $no++; endforeach; ?>

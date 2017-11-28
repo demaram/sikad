@@ -69,24 +69,26 @@ class S_nilai_tugas extends CI_Controller
          $id_matpel = $this->input->post('id_matpel');
          $id_smt    = $this->input->post('id_smt');
 
+
         $siswa      = $this->db->query("SELECT * FROM tbl_pd_siswa where id_kelas = '$id_kelas'");
         $i = 1;
         foreach ($siswa->result() as $row) {
              $id_pd_siswa = $this->input->post('id_pd_siswa_'.$row->id_pd_siswa);
              $nilai_angka = $this->input->post('nilai_angka_'.$row->id_pd_siswa);
+             $deskripsi = $this->input->post('deskripsi_'.$row->id_pd_siswa);
 
              $cari       = $this->db->query("SELECT * FROM nilai_tugas where tgl_nilai = '$tgl_nilai' AND id_pd_siswa='$row->id_pd_siswa' AND id_matpel='$id_matpel'");
 
                if ($cari->num_rows()== 1) {
                    $upd = $this->db->query("UPDATE nilai_tugas set id_matpel = '$id_matpel', id_pd_siswa = '$id_pd_siswa', tgl_nilai ='$tgl_nilai',
-                                             nilai_angka = '$nilai_angka'
+                                             nilai_angka = '$nilai_angka' , deskripsi = '$deskripsi'
                                              WHERE tgl_nilai = '$tgl_nilai' AND id_pd_siswa = '$id_pd_siswa' AND id_matpel='$id_matpel'");
                        if ($upd == TRUE ) {
                             $sukses_update = 1;
                        }
                }else{
-                       $ins = $this->db->query("INSERT into nilai_tugas (id_matpel, id_pd_siswa, tgl_nilai, nilai_angka)
-                                                                 VALUES('$id_matpel','$id_pd_siswa','$tgl_nilai','$nilai_angka')");
+                       $ins = $this->db->query("INSERT into nilai_tugas (id_matpel, id_pd_siswa, tgl_nilai, nilai_angka,deskripsi)
+                                                                 VALUES('$id_matpel','$id_pd_siswa','$tgl_nilai','$nilai_angka','$deskripsi')");
                        if ($ins == TRUE) {
                             $sukses_insert=1;
                        }

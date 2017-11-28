@@ -30,7 +30,7 @@ $this->load->view('admin_views/_template/head');
 
 
                     $id = $this->input->get('id');
-                    $data_kelas = $this->db->query("SELECT * FROM tbl_pr WHERE id_pr = '$id'");
+                    $data_kelas = $this->db->query("SELECT * FROM tbl_pr WHERE id_pr = '$id' ");
                     $row = $data_kelas->result();
                     foreach ($data_kelas->result() as $row) {
 

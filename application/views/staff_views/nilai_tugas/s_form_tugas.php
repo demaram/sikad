@@ -115,6 +115,7 @@ $this->load->view('admin_views/_template/head');
                                                                                      <th >Nama</th>
                                                                                      <th >NISN</th>
                                                                                      <th >Nilai Tugas</th>
+                                                                                     <th >Deskripsi</th>
                                                                                 </tr>
                                                                            </thead>
                                                                            <tbody>
@@ -148,6 +149,7 @@ $this->load->view('admin_views/_template/head');
                                                                                          }
                                                                                     </style>
                                                                                     <td><input type="text" class="form-control setengah number" name="nilai_angka_<?=$row->id_pd_siswa?>" value="<?=$tugas->nilai_angka?>" maxlength="3"></td>
+                                                                                    <td><input type="text" class="form-control" name="deskripsi_<?=$row->id_pd_siswa?>" value="<?=$tugas->deskripsi?>"></td>
                                                                                     <input type="hidden" name="id_pd_siswa_<?=$row->id_pd_siswa?>" value="<?=$row->id_pd_siswa?>">
 
 
